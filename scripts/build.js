@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 const fs = require('fs')
 const rollup = require('rollup').rollup
-const babel = require('rollup-plugin-babel')
-const replace = require('rollup-plugin-replace')
-const { uglify } = require('rollup-plugin-uglify')
+const babel = require('@rollup/plugin-babel')
+const replace = require('@rollup/plugin-replace')
+const terser = require('@rollup/plugin-terser')
 const meta = require('../package.json')
 
 const banner = `/*!
@@ -77,7 +77,7 @@ rollup(config)
         replace({
           'process.env.NODE_ENV': JSON.stringify('production'),
         }),
-        uglify({
+        terser({
           output: {
             comments(node, comment) {
               const text = comment.value
